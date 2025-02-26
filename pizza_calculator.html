@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-image: url('https://www.transparenttextures.com/patterns/brick-wall-dark.png');
+            background-color: #f4a261;
+            color: white;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        input {
+            margin: 5px;
+            padding: 10px;
+            width: 80%;
+            border-radius: 5px;
+            border: none;
+            text-align: center;
+            font-weight: bold;
+        }
+        input:nth-child(1) { background-color: red; color: white; }
+        input:nth-child(2) { background-color: white; color: black; }
+        input:nth-child(3) { background-color: green; color: white; }
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            background-color: #e63946;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #d62828;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Pizza Calculator</h2>
+        <label for="guests">Number of Guests (N):</label>
+        <input type="number" id="guests" min="1"><br>
+        
+        <label for="slices">Slices per Guest (S):</label>
+        <input type="number" id="slices" min="1"><br>
+        
+        <label for="hungry">Hunger Factor (A):</label>
+        <input type="number" id="hungry" min="1" step="0.1"><br>
+        
+        <button onclick="calculatePizzas()">Calculate Pizzas</button>
+        
+        <h3 id="result"></h3>
+    </div>
+    
+    <script>
+        function calculatePizzas() {
+            let N = document.getElementById("guests").value;
+            let S = document.getElementById("slices").value;
+            let A = document.getElementById("hungry").value;
+            
+            if (N <= 0 || S <= 0 || A <= 0) {
+                document.getElementById("result").innerText = "Please enter valid values.";
+                return;
+            }
+            
+            let totalSlices = N * S * A;
+            let pizzasNeeded = Math.ceil(totalSlices / 8); // Assuming 1 pizza has 8 slices
+            
+            document.getElementById("result").innerText = `You need ${pizzasNeeded} pizza(s).`;
+        }
+    </script>
+</body>
+</html>
