@@ -21,7 +21,7 @@
             border-radius: 10px;
             background-color: rgba(0, 0, 0, 0.7);
         }
-        input {
+        input, select {
             margin: 5px;
             padding: 10px;
             width: 80%;
@@ -61,6 +61,12 @@
         <label for="hungry">Hunger Factor (A):</label>
         <input type="number" id="hungry" min="1" step="0.1"><br>
         
+        <label for="size">Pizza Size (S):</label>
+        <select id="size">
+            <option value="L">Large</option>
+            <option value="M">Medium</option>
+        </select><br>
+        
         <button onclick="calculatePizzas()">Calculate Pizzas</button>
         
         <h3 id="result"></h3>
@@ -71,6 +77,7 @@
             let N = document.getElementById("guests").value;
             let S = document.getElementById("slices").value;
             let A = document.getElementById("hungry").value;
+            let size = document.getElementById("size").value;
             
             if (N <= 0 || S <= 0 || A <= 0) {
                 document.getElementById("result").innerText = "Please enter valid values.";
@@ -78,7 +85,11 @@
             }
             
             let totalSlices = N * S * A;
-            let pizzasNeeded = Math.ceil(totalSlices / 8); // Assuming 1 pizza has 8 slices
+            let pizzasNeeded = Math.ceil(totalSlices / 8);
+            
+            if (size === "M") {
+                pizzasNeeded = Math.ceil(pizzasNeeded * 1.2);
+            }
             
             document.getElementById("result").innerText = `You need ${pizzasNeeded} pizza(s).`;
         }
